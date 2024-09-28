@@ -8,6 +8,7 @@
 
 
 
-网页版：https://flowus.cn/dinghanfei/share/0324526f-29b3-4061-8bf7-84f995294cff?code=Z5XNG3
+网页版：包含课程所需要的资源和课程视频链接，页面最下方为网页版笔记！
+https://flowus.cn/dinghanfei/share/0324526f-29b3-4061-8bf7-84f995294cff?code=Z5XNG3
 【FlowUs 息流】CS106L: Standard C++ Programming
 <img width="1189" alt="image" src="https://github.com/user-attachments/assets/bcbde1fc-3007-457a-a9e3-62fb02cc94bf">
