@@ -1,4 +1,4 @@
-# Lecture15 RALL & Smart Pointers
+# Lecture 15 RALL & Smart Pointers
 
 ### RALL
 
