@@ -248,6 +248,60 @@ auto likedByAvery = [&teas, banned](auto type){
 
 ### Algorithm
 
-上文中提到的`countOccurences`其实在STL中有更好的实现方法，即`count/count_if`
+可参阅文档：
 
-`count`是没有谓词的，你只需要提供数据值，然后它会检查有多少个实例。`count_if`需要谓词。
+​	https://www.apiref.com/cpp-zh/cpp/algorithm.html
+
+​	https://oi-wiki.org/lang/csl/algorithm/
+
++ 上文中提到的`countOccurences`其实在STL中有更好的实现方法，即`count/count_if`。`count`是没有谓词的，你只需要提供数据值，然后它会检查有多少个实例。`count_if`需要谓词。
+
+- `sort`：https://www.apiref.com/cpp-zh/cpp/algorithm/sort.html
+
+	排序。`sort(v.begin(), v.end(), cmp)` 或 `sort(a + begin, a + end, cmp)`，其中 `end` 是排序的数组最后一个元素的后一位，`cmp` 为自定义的比较函数。
+
+	- `stable_sort`：稳定排序，用法同 `sort()`。
+
+- `nth_element`：按指定范围进行分类，即找出序列中第 n大的元素，使其左边均为小于它的数，右边均为大于它的数。`nth_element(v.begin(), v.begin() + mid, v.end(), cmp)` 或 `nth_element(a + begin, a + begin + mid, a + end, cmp)`。
+
++ `copy_if`：https://www.apiref.com/cpp-zh/cpp/algorithm/copy.html
+
+	查看某一个范围，并将所有满足predicate的元素复制到目标位置。
+
+	` std::copy(iterator source_first, iterator source_end, iterator target_start);`
+
+	其中
+
+	- `iterator source_first, iterator source_end`- 是源容器的迭代器位置。
+	- `iterator target_start`- 是目标容器的开始迭代器。
+
+	返回值： `iterator`- 它是指向已复制元素的目标范围末尾的迭代器。
+
+	eg：这种情况下是无效的：
+
+	```c++
+	std::copy_if(courses.begin(), courses.end(), cscourses, isDep);
+	```
+
+	vector会有一个默认的大小，但是这些algorithm并不是vector本身的成员函数，所以它们其实不能改变那个vector的大小。所以它们其实是尝试向vector中写入，然而会超出end iterator，然后继续写入东西。
+
+	解决方法：有一种特殊的迭代器，可以改表container的大小，即`back_inserter`
+
+	```c++
+	std::copy(course.begin(), course.end(), back_inserter(cscourses), isDep);
+	```
+
++ `remove_if`：https://www.apiref.com/cpp-zh/cpp/algorithm/remove.html
+
+	删除。从向量中移除所有满足predicate返回true的项。但是注意，它删除后不会改变container的大小，即使用remove后，container有效部分的后面会有一堆垃圾数据。
+
+	解决方法：`erase-remove`
+
+	```c++
+	v.erase(
+	  std::remove_if(v.begin(),v.end(),pred),
+	  v.end()
+	)
+	```
+
+	这样就删掉了尾部的垃圾数据。
